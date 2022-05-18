@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build spring-petclinic') {
+            steps {
+                git url: 'https://github.com/flouis1/spring-petclinic-jenkins.git', branch 'master'
+                sh ""./mvnw package -Djacoco.skip -Dsurefire.exitTimeout=600"
+            }
+        }
+        stage('Docker') {
+            steps {
+                sh '''#!/bin/bash
+                    cd spring-petclinic-jenkins
+                    ./mvnw spring-boot:build-image
+                '''
+            }
+        }
+    }
+}
