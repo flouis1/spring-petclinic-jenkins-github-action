@@ -1,3 +1,3 @@
-FROM openjdk:jdk-11.0.15_10-alpine
+FROM openjdk:19-jdk-alpine3.15
 COPY target/*.jar spring_built.jar
 ENTRYPOINT ["java","-jar","/spring_built.jar"]
