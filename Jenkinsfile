@@ -20,7 +20,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    git 'https://github.com/flouis1/spring-petclinic-jenkins.git'
+                    sh 'ls -all'
                     docker.build("default-docker-local/spring-petclinic:latest")
                 }
             }
