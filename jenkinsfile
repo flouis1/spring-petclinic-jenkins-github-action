@@ -1,18 +1,28 @@
 pipeline {
     agent any
+    environment {
+        CI = true
+    }
     stages {
-        stage('Build spring-petclinic') {
+        stage('Build') {
             steps {
-                git url: 'https://github.com/flouis1/spring-petclinic-jenkins.git', branch 'master'
-                sh "./mvnw package -Djacoco.skip -Dsurefire.exitTimeout=600"
+                // Get some code from a GitHub repository
+                git 'https://github.com/flouis1/spring-petclinic-jenkins.git'
+                // Build spring packages
+                sh "./mvnw package"
+            }
+            post {
+                success {
+                    archiveArtifacts 'target/*.jar'
+                }
             }
         }
-        stage('Docker') {
+        stage('Docker Build') {
             steps {
-                sh '''#!/bin/bash
-                    cd spring-petclinic-jenkins
-                    ./mvnw spring-boot:build-image
-                '''
+                script {
+                    git 'https://github.com/flouis1/spring-petclinic-jenkins.git'
+                    docker.build("default-docker-local/spring-petclinic:latest")
+                }
             }
         }
     }
