@@ -27,11 +27,12 @@ pipeline {
         }
         stage('Publish Docker image') {
             steps {
-                rtDockerPush(
-                    serverId: "artifactory-instance",
-                    image: "default-docker-local/spring-petclinic:latest",
-                    targetRepo: "spring-petclinic-jenkins",
-                )
+                script {
+                    docker.withRegistry('https://flouis1.jfrog.io/artifactory/spring-petclinic', 'artifactory-instance') {
+                        docker.image("default-docker-local/spring-petclinic:latest").push()
+                        //docker.image("default-docker-local/hello-world:${TAG}").push("latest")
+                    }
+                }
             }
         }
     }
