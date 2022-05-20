@@ -25,5 +25,14 @@ pipeline {
                 }
             }
         }
+        stage('Publish Docker image') {
+            steps {
+                rtDockerPush(
+                    serverId: "artifactory-instance",
+                    image: "default-docker-local/spring-petclinic:latest",
+                    targetRepo: "spring-petclinic-jenkins",
+                )
+            }
+        }
     }
 }
