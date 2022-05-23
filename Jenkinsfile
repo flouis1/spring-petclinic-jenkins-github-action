@@ -30,7 +30,6 @@ pipeline {
                 script {
                     docker.withRegistry('https://flouis1.jfrog.io', 'arti_server') {
                         docker.image("default-docker-local/spring-petclinic:latest").push()
-                        //docker.image("default-docker-local/hello-world:${TAG}").push("latest")
                     }
                 }
             }
