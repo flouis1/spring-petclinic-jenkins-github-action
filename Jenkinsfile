@@ -6,8 +6,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Get some code from a GitHub repository
-                //git 'https://github.com/flouis1/spring-petclinic-jenkins'
                 // Build spring packages
                 sh "./mvnw package"
             }
