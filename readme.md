@@ -187,3 +187,7 @@ EXPOSE 8080
 COPY target/*.jar /spring_built.jar
 CMD ["java","-jar","/spring_built.jar"]
 ```
+#### Use the docker image
+```
+docker run -d -p 8080:8080 flouis1.jfrog.io/default-docker-local/spring-petclinic:latest
+```
