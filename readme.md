@@ -1,4 +1,4 @@
-# Job Done in this project
+# Build and test petclinic container
 ## Setup jenkins
 ### Version
 2.332.3
